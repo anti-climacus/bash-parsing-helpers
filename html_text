@@ -1,0 +1,37 @@
+#!/usr/bin/python3
+
+# Based on:
+# http://stackoverflow.com/questions/1936466/beautifulsoup-grab-visible-webpage-text
+
+from bs4 import BeautifulSoup
+import argparse
+import sys
+import re
+
+def visible(element):
+    if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:
+        return False
+
+    element_str = str(element).lower()
+
+    if len(element_str.strip()) < 1:
+        return False
+    elif re.match('<!--.*-->', element_str):
+        return False
+    elif element_str.find("<script") >= 0:
+        return False
+
+    return True
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
+    args = parser.parse_args()
+
+    soup = BeautifulSoup(args.infile.read())
+    args.infile.close()
+    #texts = soup.findAll(text=True)
+    #visible_texts = filter(visible, texts)
+
+    for visible_text in filter(visible, soup.findAll(text=True)):
+        print(visible_text)
