@@ -1,0 +1,3 @@
+#!/bin/bash
+
+str_lower | str_split | sort | uniq | str_len | sort -rn
