@@ -1,0 +1,3 @@
+#!/bin/bash
+
+str_split | str_strippunct | str_lower
