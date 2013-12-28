@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sed -e "s/^[ \t\xc2\xa0\r]\+//" -e "s/[ \t\xc2\xa0\r]\+\$//"
