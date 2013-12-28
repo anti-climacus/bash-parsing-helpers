@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# pipe unique words into this.
+# e.g. cat a.txt | unique_words | same_words b.txt | same_words c.txt
+# Words which are in pipe and also in ${1}
+
+comm -12 - <(cat "${1}" | unique_words)
