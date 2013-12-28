@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# see also: same_words
+# Words in pipe but not in ${1}
+
+comm -23 - <(cat "${1}" | unique_words)
