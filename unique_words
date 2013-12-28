@@ -1,0 +1,3 @@
+#!/bin/bash
+
+str_words | sort | uniq
