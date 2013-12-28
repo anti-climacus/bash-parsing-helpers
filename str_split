@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#TODO: allow user to specify character(s) to split on, or pick from options.
+sed -e "s/[ \xc2\xa0\r\t]/\n/g" | grep -v "^\$"
