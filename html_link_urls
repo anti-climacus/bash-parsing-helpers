@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+
+# prints all <a href="*" ...> values from html input
+
+import argparse
+import sys
+from bs4 import BeautifulSoup
+
+def links_from_html(unquoted_html):
+    if unquoted_html is None or len(unquoted_html) < 1:
+        return
+
+    for link in BeautifulSoup(unquoted_html).find_all("a"):
+        if (not link.has_key("href")) or link["href"] is None or link["href"] == "":
+            continue
+
+        print(link["href"])
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
+    args = parser.parse_args()
+
+    links_from_html(args.infile.read())
+    args.infile.close()
